@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <h1>YouTube Configs</h1>
+
+  <section>
+    <h2>Player</h2>
+    <label class="toggle-row">
+      <span>Shorts como video normal</span>
+      <input type="checkbox" id="shortsToVideo">
+      <span class="slider"></span>
+    </label>
+  </section>
+
+  <section>
+    <h2>Esconder Shorts em...</h2>
+    <label class="toggle-row">
+      <span><strong>Todos os lugares</strong></span>
+      <input type="checkbox" id="hideShortsAll">
+      <span class="slider"></span>
+    </label>
+    <div id="specific-toggles">
+    <label class="toggle-row">
+      <span>Menu lateral</span>
+      <input type="checkbox" id="hideShortsMenu">
+      <span class="slider"></span>
+    </label>
+    <label class="toggle-row">
+      <span>Home</span>
+      <input type="checkbox" id="hideShortsHome">
+      <span class="slider"></span>
+    </label>
+    <label class="toggle-row">
+      <span>Busca</span>
+      <input type="checkbox" id="hideShortsSearch">
+      <span class="slider"></span>
+    </label>
+    <label class="toggle-row">
+      <span>Inscricoes</span>
+      <input type="checkbox" id="hideShortsSubscriptions">
+      <span class="slider"></span>
+    </label>
+    <label class="toggle-row">
+      <span>Canais</span>
+      <input type="checkbox" id="hideShortsChannel">
+      <span class="slider"></span>
+    </label>
+    <label class="toggle-row">
+      <span>Sugestoes (watch)</span>
+      <input type="checkbox" id="hideShortsWatch">
+      <span class="slider"></span>
+    </label>
+    <label class="toggle-row">
+      <span>Trending/Explorar</span>
+      <input type="checkbox" id="hideShortsTrending">
+      <span class="slider"></span>
+    </label>
+    </div>
+  </section>
+
+  <section>
+    <h2>Pagina de video</h2>
+    <label class="toggle-row">
+      <span>Esconder videos recomendados</span>
+      <input type="checkbox" id="hideWatchRecommendations">
+      <span class="slider"></span>
+    </label>
+    <label class="toggle-row">
+      <span>Esconder playlist</span>
+      <input type="checkbox" id="hideWatchPlaylist">
+      <span class="slider"></span>
+    </label>
+    <label class="select-row">
+      <span>Tamanho do player</span>
+      <select id="playerSize">
+        <option value="default">Padrao do YouTube</option>
+        <option value="fit">Medio (cabe na tela)</option>
+        <option value="full">Largura total</option>
+      </select>
+    </label>
+    <p class="hint">Aplica quando a lateral esta escondida.</p>
+  </section>
+
+  <section>
+    <h2>Qualidade do video</h2>
+    <label class="select-row">
+      <span>Qualidade preferida</span>
+      <select id="videoQuality">
+        <option value="auto">Padrao do YouTube</option>
+        <option value="large">480p</option>
+        <option value="hd720">720p (HD)</option>
+        <option value="hd1080">1080p (Full HD)</option>
+        <option value="hd1440">1440p (2K)</option>
+        <option value="hd2160">2160p (4K)</option>
+      </select>
+    </label>
+    <p class="hint">Se o video nao tiver a qualidade escolhida, aplica a mais alta disponivel.</p>
+  </section>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+html.ytc-hide-shorts-menu ytd-guide-entry-renderer:has(a[href^="/shorts"]),
+html.ytc-hide-shorts-menu yt-guide-entry-renderer:has(a[href^="/shorts"]),
+html.ytc-hide-shorts-menu ytd-mini-guide-entry-renderer:has(a[href^="/shorts"]),
+html.ytc-hide-shorts-menu yt-mini-guide-entry-renderer:has(a[href^="/shorts"]),
+html.ytc-hide-shorts-menu ytd-guide-entry-renderer:has(a[title="Shorts"]),
+html.ytc-hide-shorts-menu yt-guide-entry-renderer:has(a[title="Shorts"]),
+html.ytc-hide-shorts-menu ytd-mini-guide-entry-renderer:has(a[title="Shorts"]),
+html.ytc-hide-shorts-menu yt-mini-guide-entry-renderer:has(a[title="Shorts"]) {
+  display: none !important;
+}
+
+html.ytc-hide-shorts-home.ytc-ctx-home ytd-rich-shelf-renderer[is-shorts],
+html.ytc-hide-shorts-home.ytc-ctx-home ytd-reel-shelf-renderer {
+  display: none !important;
+}
+
+html.ytc-hide-shorts-search.ytc-ctx-search ytd-reel-shelf-renderer,
+html.ytc-hide-shorts-search.ytc-ctx-search ytd-video-renderer:has(a#thumbnail[href^="/shorts"]),
+html.ytc-hide-shorts-search.ytc-ctx-search ytd-grid-video-renderer:has(a[href^="/shorts"]) {
+  display: none !important;
+}
+
+html.ytc-hide-shorts-subscriptions.ytc-ctx-subscriptions ytd-reel-shelf-renderer,
+html.ytc-hide-shorts-subscriptions.ytc-ctx-subscriptions ytd-rich-shelf-renderer[is-shorts],
+html.ytc-hide-shorts-subscriptions.ytc-ctx-subscriptions ytd-rich-item-renderer:has(a[href^="/shorts"]) {
+  display: none !important;
+}
+
+html.ytc-hide-shorts-channel.ytc-ctx-channel ytd-reel-shelf-renderer,
+html.ytc-hide-shorts-channel.ytc-ctx-channel ytd-rich-shelf-renderer[is-shorts],
+html.ytc-hide-shorts-channel.ytc-ctx-channel yt-tab-shape:has(a[href$="/shorts"]),
+html.ytc-hide-shorts-channel.ytc-ctx-channel yt-tab-group-shape yt-tab-shape[tab-title="Shorts"] {
+  display: none !important;
+}
+
+html.ytc-hide-shorts-watch.ytc-ctx-watch ytd-reel-shelf-renderer {
+  display: none !important;
+}
+
+html.ytc-hide-shorts-trending.ytc-ctx-trending ytd-reel-shelf-renderer,
+html.ytc-hide-shorts-trending.ytc-ctx-trending ytd-rich-shelf-renderer[is-shorts] {
+  display: none !important;
+}
+
+html.ytc-hide-watch-recommendations.ytc-ctx-watch ytd-watch-next-secondary-results-renderer,
+html.ytc-hide-watch-recommendations.ytc-ctx-watch #secondary #related {
+  display: none !important;
+}
+
+html.ytc-hide-watch-playlist.ytc-ctx-watch ytd-playlist-panel-renderer,
+html.ytc-hide-watch-playlist.ytc-ctx-watch #secondary #playlist {
+  display: none !important;
+}
+
+html.ytc-hide-watch-recommendations.ytc-ctx-watch:not(.ytc-has-playlist) #secondary,
+html.ytc-hide-watch-recommendations.ytc-hide-watch-playlist.ytc-ctx-watch #secondary {
+  display: none !important;
+}
+
+html.ytc-expand-player ytd-watch-flexy {
+  --ytd-watch-flexy-max-player-width: 100000px !important;
+}
+
+html.ytc-expand-player #columns {
+  max-width: none !important;
+  margin-left: 24px !important;
+  margin-right: 24px !important;
+}
+
+html.ytc-expand-player #primary,
+html.ytc-expand-player #primary-inner {
+  max-width: none !important;
+  width: 100% !important;
+  margin-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+html.ytc-expand-player #player-container,
+html.ytc-expand-player #player {
+  max-width: none !important;
+}
+
+html.ytc-expand-player #movie_player {
+  margin: 0 auto !important;
+}
+
+html.ytc-hide-shorts-all ytd-reel-shelf-renderer,
+html.ytc-hide-shorts-all ytd-rich-shelf-renderer[is-shorts],
+html.ytc-hide-shorts-all ytd-guide-entry-renderer:has(a[href^="/shorts"]),
+html.ytc-hide-shorts-all yt-guide-entry-renderer:has(a[href^="/shorts"]),
+html.ytc-hide-shorts-all ytd-mini-guide-entry-renderer:has(a[href^="/shorts"]),
+html.ytc-hide-shorts-all yt-mini-guide-entry-renderer:has(a[href^="/shorts"]),
+html.ytc-hide-shorts-all ytd-guide-entry-renderer:has(a[title="Shorts"]),
+html.ytc-hide-shorts-all yt-guide-entry-renderer:has(a[title="Shorts"]),
+html.ytc-hide-shorts-all ytd-mini-guide-entry-renderer:has(a[title="Shorts"]),
+html.ytc-hide-shorts-all yt-mini-guide-entry-renderer:has(a[title="Shorts"]),
+html.ytc-hide-shorts-all ytd-video-renderer:has(a#thumbnail[href^="/shorts"]),
+html.ytc-hide-shorts-all ytd-grid-video-renderer:has(a[href^="/shorts"]),
+html.ytc-hide-shorts-all ytd-rich-item-renderer:has(a[href^="/shorts"]),
+html.ytc-hide-shorts-all yt-tab-shape:has(a[href$="/shorts"]) {
+  display: none !important;
+}
