@@ -46,7 +46,8 @@ h2 {
   margin: 6px 0 0;
 }
 
-#specific-toggles.disabled {
+#specific-toggles.disabled,
+#subtitles-options.disabled {
   opacity: 0.4;
   pointer-events: none;
 }

@@ -86,8 +86,72 @@
   </section>
 
   <section>
-    <h2>Qualidade do video</h2>
-    <label class="select-row">
+    <h2>Idioma original</h2>
+    <label class="toggle-row">
+      <span>Titulos originais</span>
+      <input type="checkbox" id="originalTitles">
+      <span class="slider"></span>
+    </label>
+    <label class="toggle-row">
+      <span>Audio original (sem dublagem)</span>
+      <input type="checkbox" id="originalAudio">
+      <span class="slider"></span>
+    </label>
+    <label class="toggle-row">
+      <span>Descricao original</span>
+      <input type="checkbox" id="originalDescriptions">
+      <span class="slider"></span>
+    </label>
+  </section>
+
+  <section>
+    <h2>Legendas</h2>
+    <label class="toggle-row">
+      <span><strong>Legendas automaticas</strong></span>
+      <input type="checkbox" id="subtitlesAuto">
+      <span class="slider"></span>
+    </label>
+    <div id="subtitles-options">
+      <label class="select-row">
+        <span>Idioma da legenda</span>
+        <select id="subtitlesLanguage">
+          <option value="auto">YouTube decide</option>
+          <option value="pt">Portugues</option>
+          <option value="en">English</option>
+          <option value="es">Espanol</option>
+          <option value="fr">Francais</option>
+          <option value="de">Deutsch</option>
+          <option value="it">Italiano</option>
+          <option value="ja">日本語</option>
+          <option value="ko">한국어</option>
+          <option value="zh">中文</option>
+        </select>
+      </label>
+      <label class="select-row">
+        <span>Meu idioma</span>
+        <select id="myLanguage">
+          <option value="pt">Portugues</option>
+          <option value="en">English</option>
+          <option value="es">Espanol</option>
+          <option value="fr">Francais</option>
+          <option value="de">Deutsch</option>
+          <option value="it">Italiano</option>
+          <option value="ja">日本語</option>
+          <option value="ko">한국어</option>
+          <option value="zh">中文</option>
+        </select>
+      </label>
+      <label class="toggle-row">
+        <span>Legenda mesmo no meu idioma</span>
+        <input type="checkbox" id="subtitlesForMyLanguage">
+        <span class="slider"></span>
+      </label>
+    </div>
+    <p class="hint">Desligado: videos comecam sempre sem legenda.</p>
+  </section>
+
+  <section>
+    <h2>Qualidade do video</h2>    <label class="select-row">
       <span>Qualidade preferida</span>
       <select id="videoQuality">
         <option value="auto">Padrao do YouTube</option>

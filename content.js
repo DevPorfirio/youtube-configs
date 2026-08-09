@@ -4,6 +4,8 @@
   const SHORTS_RE = /^\/shorts\/([A-Za-z0-9_-]{6,})/;
   const MSG_KEY = "ytc-shorts-to-video";
   const QUALITY_KEY = "ytc-video-quality";
+  const ORIGINAL_KEY = "ytc-original-content";
+  const SUBS_KEY = "ytc-subtitles";
 
   const HIDE_TOGGLES = [
     "hideShortsAll",
@@ -32,6 +34,13 @@
     hideWatchPlaylist: false,
     videoQuality: "auto",
     playerSize: "default",
+    originalTitles: false,
+    originalAudio: false,
+    originalDescriptions: false,
+    subtitlesAuto: false,
+    subtitlesLanguage: "auto",
+    myLanguage: "pt",
+    subtitlesForMyLanguage: false,
   };
 
   let settings = { ...DEFAULTS };
@@ -39,6 +48,25 @@
   const postState = () => {
     window.postMessage({ key: MSG_KEY, enabled: settings.shortsToVideo }, "*");
     window.postMessage({ key: QUALITY_KEY, quality: settings.videoQuality }, "*");
+    window.postMessage(
+      {
+        key: ORIGINAL_KEY,
+        titles: settings.originalTitles,
+        audio: settings.originalAudio,
+        descriptions: settings.originalDescriptions,
+      },
+      "*"
+    );
+    window.postMessage(
+      {
+        key: SUBS_KEY,
+        auto: settings.subtitlesAuto,
+        language: settings.subtitlesLanguage,
+        myLanguage: settings.myLanguage,
+        forMyLanguage: settings.subtitlesForMyLanguage,
+      },
+      "*"
+    );
   };
 
   const contextClass = () => {
