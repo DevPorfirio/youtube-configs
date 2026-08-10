@@ -2,6 +2,7 @@ const api = typeof browser !== "undefined" ? browser : chrome;
 
 const KEYS = [
   "shortsToVideo",
+  "disableHoldSpeed",
   "hideShortsAll",
   "hideShortsMenu",
   "hideShortsHome",
@@ -23,6 +24,7 @@ const SELECTS = ["videoQuality", "playerSize", "subtitlesLanguage", "myLanguage"
 
 const DEFAULTS = {
   shortsToVideo: true,
+  disableHoldSpeed: true,
   hideShortsAll: false,
   hideShortsMenu: false,
   hideShortsHome: false,

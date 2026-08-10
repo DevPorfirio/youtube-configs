@@ -3,6 +3,7 @@
 
   const SHORTS_RE = /^\/shorts\/([A-Za-z0-9_-]{6,})/;
   const MSG_KEY = "ytc-shorts-to-video";
+  const HOLD_SPEED_KEY = "ytc-disable-hold-speed";
   const QUALITY_KEY = "ytc-video-quality";
   const ORIGINAL_KEY = "ytc-original-content";
   const SUBS_KEY = "ytc-subtitles";
@@ -22,6 +23,7 @@
 
   const DEFAULTS = {
     shortsToVideo: true,
+    disableHoldSpeed: true,
     hideShortsAll: false,
     hideShortsMenu: false,
     hideShortsHome: false,
@@ -47,6 +49,7 @@
 
   const postState = () => {
     window.postMessage({ key: MSG_KEY, enabled: settings.shortsToVideo }, "*");
+    window.postMessage({ key: HOLD_SPEED_KEY, disabled: settings.disableHoldSpeed }, "*");
     window.postMessage({ key: QUALITY_KEY, quality: settings.videoQuality }, "*");
     window.postMessage(
       {
@@ -98,6 +101,7 @@
   const refresh = () => {
     applyClasses();
     applyExpandClass();
+    document.documentElement.dataset.ytcDisableHoldSpeed = settings.disableHoldSpeed ? "1" : "0";
     postState();
     requestAnimationFrame(() => window.dispatchEvent(new Event("resize")));
     scheduleResizePlayer();

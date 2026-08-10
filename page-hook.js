@@ -1,6 +1,7 @@
 (() => {
   const SHORTS_RE = /^\/shorts\/([A-Za-z0-9_-]{6,})/;
   const MSG_KEY = "ytc-shorts-to-video";
+  const HOLD_SPEED_KEY = "ytc-disable-hold-speed";
   const QUALITY_KEY = "ytc-video-quality";
   const ORIGINAL_KEY = "ytc-original-content";
   const SUBS_KEY = "ytc-subtitles";
@@ -8,6 +9,30 @@
   const QUALITY_ORDER = ["tiny", "small", "medium", "large", "hd720", "hd1080", "hd1440", "hd2160", "highres"];
 
   let enabled = true;
+  let disableHoldSpeed = true;
+  let holdInteraction = false;
+  let holdRate = 1;
+  let holdSpeedTimer = null;
+  let holdSpeedBefore = null;
+
+  const nativeRate = Object.getOwnPropertyDescriptor(
+    HTMLMediaElement.prototype,
+    "playbackRate"
+  );
+
+  if (nativeRate?.get && nativeRate?.set) {
+    Object.defineProperty(HTMLMediaElement.prototype, "playbackRate", {
+      configurable: nativeRate.configurable,
+      enumerable: nativeRate.enumerable,
+      get: nativeRate.get,
+      set(value) {
+        if (disableHoldSpeed && holdInteraction && value === 2) {
+          return nativeRate.set.call(this, holdRate || 1);
+        }
+        return nativeRate.set.call(this, value);
+      },
+    });
+  }
   let desiredQuality = "auto";
   let originalTitles = false;
   let originalAudio = false;
@@ -17,9 +42,19 @@
   let myLanguage = "pt";
   let subtitlesForMyLanguage = false;
 
+  const readHoldSpeedState = () => {
+    const next = document.documentElement?.dataset.ytcDisableHoldSpeed === "1";
+    disableHoldSpeed = next;
+  };
+
   window.addEventListener("message", (e) => {
     if (e.source !== window || !e.data) return;
     if (e.data.key === MSG_KEY) enabled = !!e.data.enabled;
+    if (e.data.key === HOLD_SPEED_KEY) {
+      disableHoldSpeed = !!e.data.disabled;
+      document.documentElement.dataset.ytcDisableHoldSpeed = disableHoldSpeed ? "1" : "0";
+      if (!disableHoldSpeed) stopHoldSpeedGuard();
+    }
     if (e.data.key === QUALITY_KEY) {
       desiredQuality = e.data.quality;
       applyQuality();
@@ -40,6 +75,73 @@
       applySubtitles();
     }
   });
+
+  readHoldSpeedState();
+  new MutationObserver(readHoldSpeedState).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-ytc-disable-hold-speed"],
+  });
+
+  const getVideo = () => document.querySelector("video");
+
+  const guardHoldSpeed = () => {
+    if (!disableHoldSpeed || holdSpeedTimer) return;
+    const video = getVideo();
+    if (!video) return;
+    holdSpeedBefore = video.playbackRate;
+    holdRate = holdSpeedBefore || 1;
+    holdInteraction = true;
+    video.addEventListener("ratechange", restoreHoldSpeed);
+    holdSpeedTimer = setInterval(() => {
+      const current = getVideo();
+      if (!current || current.playbackRate !== 2) return;
+      current.playbackRate = holdSpeedBefore || 1;
+    }, 25);
+  };
+
+  const stopHoldSpeedGuard = () => {
+    holdInteraction = false;
+    const video = getVideo();
+    video?.removeEventListener("ratechange", restoreHoldSpeed);
+    if (holdSpeedTimer) clearInterval(holdSpeedTimer);
+    holdSpeedTimer = null;
+    holdSpeedBefore = null;
+  };
+
+  const restoreHoldSpeed = () => {
+    const video = getVideo();
+    if (!disableHoldSpeed || !holdSpeedTimer || !video || video.playbackRate !== 2) return;
+    video.playbackRate = holdSpeedBefore || 1;
+  };
+
+  const toggleVideoFromSpace = (event) => {
+    if (!disableHoldSpeed || event.code !== "Space") return;
+    if (!event.target.closest?.("#movie_player") && event.target !== getVideo()) return;
+
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    const video = getVideo();
+    if (!video) return;
+    if (video.paused) video.play();
+    else video.pause();
+  };
+
+  document.addEventListener("ratechange", restoreHoldSpeed, true);
+
+  document.addEventListener("keydown", (event) => {
+    toggleVideoFromSpace(event);
+    if (event.code === "Space" && !event.repeat) guardHoldSpeed();
+  }, true);
+  document.addEventListener("keyup", (event) => {
+    if (event.code === "Space") stopHoldSpeedGuard();
+  }, true);
+  document.addEventListener("pointerdown", (event) => {
+    if (event.button === 0 && event.target.closest?.("#movie_player")) guardHoldSpeed();
+  }, true);
+  document.addEventListener("pointerup", (event) => {
+    if (event.button === 0) stopHoldSpeedGuard();
+  }, true);
+  document.addEventListener("pointercancel", stopHoldSpeedGuard, true);
 
   const toWatchUrl = (href) => {
     const url = new URL(href, location.origin);

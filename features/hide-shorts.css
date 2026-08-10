@@ -1,3 +1,4 @@
+
 html.ytc-hide-shorts-menu ytd-guide-entry-renderer:has(a[href^="/shorts"]),
 html.ytc-hide-shorts-menu yt-guide-entry-renderer:has(a[href^="/shorts"]),
 html.ytc-hide-shorts-menu ytd-mini-guide-entry-renderer:has(a[href^="/shorts"]),
@@ -98,5 +99,13 @@ html.ytc-hide-shorts-all ytd-video-renderer:has(a#thumbnail[href^="/shorts"]),
 html.ytc-hide-shorts-all ytd-grid-video-renderer:has(a[href^="/shorts"]),
 html.ytc-hide-shorts-all ytd-rich-item-renderer:has(a[href^="/shorts"]),
 html.ytc-hide-shorts-all yt-tab-shape:has(a[href$="/shorts"]) {
+  display: none !important;
+}
+/* Hide YouTube's temporary hold-to-speed indicator. */
+.ytp-doubletap-ui-legacy,
+.ytp-speedmaster-overlay,
+.ytp-speedmaster-overlay-container,
+.ytp-player-speed-overlay,
+.ytp-hold-to-speed-overlay {
   display: none !important;
 }
