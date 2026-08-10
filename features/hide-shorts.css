@@ -58,6 +58,16 @@ html.ytc-hide-watch-recommendations.ytc-hide-watch-playlist.ytc-ctx-watch #secon
   display: none !important;
 }
 
+/* Use the playlist column's width for the content below the player. */
+html.ytc-has-playlist.ytc-hide-watch-recommendations:not(.ytc-hide-watch-playlist).ytc-ctx-watch #below {
+  width: calc(100% + var(--ytd-watch-flexy-sidebar-width, 402px) + 24px) !important;
+  max-width: none !important;
+}
+
+html.ytc-has-playlist.ytc-hide-watch-recommendations:not(.ytc-hide-watch-playlist).ytc-ctx-watch #primary-inner {
+  overflow: visible !important;
+}
+
 html.ytc-expand-player ytd-watch-flexy {
   --ytd-watch-flexy-max-player-width: 100000px !important;
 }
